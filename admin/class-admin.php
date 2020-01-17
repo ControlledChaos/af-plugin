@@ -2,7 +2,7 @@
 /**
  * Admin functiontionality and settings.
  *
- * @package    Controlled_Chaos_Plugin
+ * @package    AF_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
@@ -11,7 +11,7 @@
  * @todo       Add admin and user access checks.
  */
 
-namespace CC_Plugin\Admin;
+namespace AF_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -112,47 +112,47 @@ class Admin {
 	private function dependencies() {
 
 		// The core settings class for the plugin.
-		require_once CCP_PATH . 'admin/class-settings.php';
+		require_once AFP_PATH . 'admin/class-settings.php';
 
 		// Add icons to the titles of ACF tab and accordion fields, if active.
-		if ( ccp_acf_pro() && ! get_option( 'ccp_acf_activate_settings_page' ) ) {
-			include_once CCP_PATH . 'admin/class-acf-tab-icons.php';
+		if ( afp_acf_pro() && ! get_option( 'afp_acf_activate_settings_page' ) ) {
+			include_once AFP_PATH . 'admin/class-acf-tab-icons.php';
 		}
 
 		// Include custom fields for Advanced Custom Fields Pro, if active.
-		if ( ccp_acf_pro() ) {
-			include_once CCP_PATH . 'admin/class-settings-fields-site-acf.php';
+		if ( afp_acf_pro() ) {
+			include_once AFP_PATH . 'admin/class-settings-fields-site-acf.php';
 		}
 
 		// Restore the TinyMCE editor.
-		if ( ccp_acf_pro() ) {
-			$editor = get_field( 'ccp_classic_editor', 'option' );
+		if ( afp_acf_pro() ) {
+			$editor = get_field( 'afp_classic_editor', 'option' );
 		} else {
-			$editor = get_option( 'ccp_classic_editor' );
+			$editor = get_option( 'afp_classic_editor' );
 		}
-		if ( ( ccp_classicpress() || ccp_new_cms() ) && $editor ) {
-			include_once CCP_PATH . 'admin/classic-editor/classic-editor.php';
+		if ( ( afp_classicpress() || afp_new_cms() ) && $editor ) {
+			include_once AFP_PATH . 'admin/classic-editor/classic-editor.php';
 		}
 
 		// Functions for dasboard widgets, excluding the welcome panel.
-		require_once CCP_PATH . 'admin/dashboard/class-dashboard.php';
+		require_once AFP_PATH . 'admin/dashboard/class-dashboard.php';
 
 		// Functions for admin menu item positions and visibility.
-		require_once CCP_PATH . 'admin/class-admin-menu.php';
+		require_once AFP_PATH . 'admin/class-admin-menu.php';
 
 		// Add menus to the admin toolbar.
-		require_once CCP_PATH . 'admin/class-admin-toolbar-menus.php';
+		require_once AFP_PATH . 'admin/class-admin-toolbar-menus.php';
 
 		// Functions for various admin pages and edit screens.
-		require_once CCP_PATH . 'admin/class-admin-pages.php';
+		require_once AFP_PATH . 'admin/class-admin-pages.php';
 
 		// Import custom fields for editing, if ACF Pro is active.
-		if ( ccp_acf_options() ) {
-			include_once CCP_PATH . 'admin/class-fields-import.php';
+		if ( afp_acf_options() ) {
+			include_once AFP_PATH . 'admin/class-fields-import.php';
 		}
 
 		// Filter by page template.
-		require_once CCP_PATH . 'admin/class-admin-template-filter.php';
+		require_once AFP_PATH . 'admin/class-admin-template-filter.php';
 
 	}
 
@@ -279,12 +279,12 @@ class Admin {
 		 */
 
 		// If the site is running ClassicPress.
-		if ( ccp_classicpress() ) {
-			$default = __( 'website powered by ClassicPress', 'controlled-chaos-plugin' );
+		if ( afp_classicpress() ) {
+			$default = __( 'website powered by ClassicPress', 'af-plugin' );
 
 		// If the site is running WordPress.
 		} else {
-			$default = __( 'website powered by WordPress', 'controlled-chaos-plugin' );
+			$default = __( 'website powered by WordPress', 'af-plugin' );
 		}
 
 		/**
@@ -293,21 +293,21 @@ class Admin {
 		 *
 		 * @since  1.0.0
 		 */
-		if ( ccp_acf_options() ) {
+		if ( afp_acf_options() ) {
 
 			/**
 			 * Get the fields registered by this plugin. An additional parameter
 			 * of 'option' must be included to target the options page.
 			 */
-			$credit = get_field( 'ccp_admin_footer_credit', 'option' );
-			$link   = get_field( 'ccp_admin_footer_link', 'option' );
+			$credit = get_field( 'afp_admin_footer_credit', 'option' );
+			$link   = get_field( 'afp_admin_footer_link', 'option' );
 
 			// If a name and a URL are provided.
 			if ( $credit && $link ) {
 				$footer = sprintf(
 					'%1s %2s <a href="%3s" rel="nofollow" target="_blank">%4s</a>. ',
 					$site,
-					esc_html__( 'website designed & developed by', 'controlled-chaos-plugin' ),
+					esc_html__( 'website designed & developed by', 'af-plugin' ),
 					esc_url( $link ),
 					$credit
 				);
@@ -316,7 +316,7 @@ class Admin {
 				$footer = sprintf(
 					'%1s %2s %3s. ',
 					$site,
-					esc_html__( 'website designed & developed by', 'controlled-chaos-plugin' ),
+					esc_html__( 'website designed & developed by', 'af-plugin' ),
 					$credit
 				);
 			// If no input we use the name of the site.
@@ -336,15 +336,15 @@ class Admin {
 		 */
 		} else {
 
-			$credit = sanitize_text_field( get_option( 'ccp_footer_credit' ) );
-			$link   = esc_url_raw( get_option( 'ccp_footer_link' ) );
+			$credit = sanitize_text_field( get_option( 'afp_footer_credit' ) );
+			$link   = esc_url_raw( get_option( 'afp_footer_link' ) );
 
 			// If a name and a URL are provided.
 			if ( $credit && $link ) {
 				$footer = sprintf(
 					'%1s %2s <a href="%3s" rel="nofollow" target="_blank">%4s</a>. ',
 					$site,
-					esc_html__( 'website designed & developed by', 'controlled-chaos-plugin' ),
+					esc_html__( 'website designed & developed by', 'af-plugin' ),
 					esc_url( $link ),
 					$credit
 				);
@@ -353,7 +353,7 @@ class Admin {
 				$footer = sprintf(
 					'%1s %2s %3s. ',
 					$site,
-					esc_html__( 'website designed & developed by', 'controlled-chaos-plugin' ),
+					esc_html__( 'website designed & developed by', 'af-plugin' ),
 					$credit
 				);
 			// If no input we use the name of the site.
@@ -368,7 +368,7 @@ class Admin {
 		}
 
 		// Apply a filter for unforseen possibilities.
-		$admin_footer = apply_filters( 'ccp_admin_footer', $footer );
+		$admin_footer = apply_filters( 'afp_admin_footer', $footer );
 
 		// Echo the string.
 		echo $admin_footer;
@@ -394,7 +394,7 @@ class Admin {
 		 *
 		 * @since 1.0.0
 		 */
-		wp_enqueue_style( CCP_ADMIN_SLUG . '-admin', CCP_URL . 'admin/assets/css/admin.min.css', [], CCP_VERSION, 'all' );
+		wp_enqueue_style( AFP_ADMIN_SLUG . '-admin', AFP_URL . 'admin/assets/css/admin.min.css', [], AFP_VERSION, 'all' );
 
 		/**
 		 * Enqueue the jQuery tooltips styles.
@@ -407,7 +407,7 @@ class Admin {
 		 *
 		 * @since 1.0.0
 		 */
-		wp_enqueue_style( CCP_ADMIN_SLUG . '-tooltips', CCP_URL . 'admin/assets/css/tooltips.min.css', [], CCP_VERSION, 'all' );
+		wp_enqueue_style( AFP_ADMIN_SLUG . '-tooltips', AFP_URL . 'admin/assets/css/tooltips.min.css', [], AFP_VERSION, 'all' );
 
 		/**
 		 * Enqueue Advanced Custom Fields styles.
@@ -416,8 +416,8 @@ class Admin {
 		 *
 		 * @since 1.0.0
 		 */
-		if ( ccp_acf() ) {
-			wp_enqueue_style( CCP_ADMIN_SLUG . '-acf', CCP_URL . 'admin/assets/css/acf.css', [], CCP_VERSION, 'all' );
+		if ( afp_acf() ) {
+			wp_enqueue_style( AFP_ADMIN_SLUG . '-acf', AFP_URL . 'admin/assets/css/acf.css', [], AFP_VERSION, 'all' );
 		}
 
 		/**
@@ -427,9 +427,9 @@ class Admin {
 		 *
 		 * @since 1.0.0
 		 */
-		$welcome = get_option( 'ccp_custom_welcome' );
+		$welcome = get_option( 'afp_custom_welcome' );
 		if ( $welcome ) {
-			wp_enqueue_style( CCP_ADMIN_SLUG . '-welcome', CCP_URL . 'admin/assets/css/welcome.css', [], CCP_VERSION, 'all' );
+			wp_enqueue_style( AFP_ADMIN_SLUG . '-welcome', AFP_URL . 'admin/assets/css/welcome.css', [], AFP_VERSION, 'all' );
 		}
 
 	}
@@ -449,7 +449,7 @@ class Admin {
 
 		ob_start();
 
-		require CCP_PATH . 'admin/partials/searchform.php';
+		require AFP_PATH . 'admin/partials/searchform.php';
 
 		$form = ob_get_clean();
 
@@ -501,10 +501,10 @@ class Admin {
 		wp_enqueue_script( 'jquery-ui-tooltip' );
 
 		// Enqueue scripts for backend functionality of this plugin.
-		wp_enqueue_script( CCP_ADMIN_SLUG . '-admin', CCP_URL . 'admin/assets/js/admin.js', [ 'jquery' ], CCP_VERSION, true );
+		wp_enqueue_script( AFP_ADMIN_SLUG . '-admin', AFP_URL . 'admin/assets/js/admin.js', [ 'jquery' ], AFP_VERSION, true );
 
 		// Enqueue Conditionalize for conditional form fields.
-		wp_enqueue_script( CCP_ADMIN_SLUG . '-conditionalize', CCP_URL . 'admin/assets/js/conditionize.flexible.jquery.min.js', [ 'jquery' ], CCP_VERSION, true );
+		wp_enqueue_script( AFP_ADMIN_SLUG . '-conditionalize', AFP_URL . 'admin/assets/js/conditionize.flexible.jquery.min.js', [ 'jquery' ], AFP_VERSION, true );
 
 	}
 
@@ -517,11 +517,11 @@ class Admin {
  * @access public
  * @return object Returns an instance of the class.
  */
-function ccp_admin() {
+function afp_admin() {
 
 	return Admin::instance();
 
 }
 
 // Run an instance of the class.
-ccp_admin();
+afp_admin();

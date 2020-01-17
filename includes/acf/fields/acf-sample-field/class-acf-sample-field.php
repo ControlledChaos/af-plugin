@@ -2,7 +2,7 @@
 /**
  * Sample field for Advanced Custom Fields version 5.
  *
- * @package    Controlled_Chaos_Plugin
+ * @package    AF_Plugin
  * @subpackage Includes\ACF\Fields
  *
  * @since      1.0.0
@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @since  1.0.0
  * @access public
  */
-class CCP_Sample_Field extends acf_field {
+class AFP_Sample_Field extends acf_field {
 
 	/**
 	 * Constructor method
@@ -36,14 +36,14 @@ class CCP_Sample_Field extends acf_field {
 		 *
 		 * Single word, no spaces, underscores allowed.
 		 */
-		$this->name = 'ccp_sample_field';
+		$this->name = 'afp_sample_field';
 
 		/**
 		 * Field label
 		 *
 		 * Multiple words, can include spaces, visible when selecting a field type.
 		 */
-		$this->label = __( 'Sample Field', CCP_DOMAIN );
+		$this->label = __( 'Sample Field', AFP_DOMAIN );
 
 		/**
 		 * Field category
@@ -74,10 +74,10 @@ class CCP_Sample_Field extends acf_field {
 		 *
 		 * Array of strings that are used in JavaScript.
 		 * This allows JS strings to be translated in PHP and loaded via:
-		*  var message = acf . _e( 'ccp_sample_field', 'error' );
+		*  var message = acf . _e( 'afp_sample_field', 'error' );
 		 */
 		$this->l10n = [
-			'error'	=> __( 'Error! Please enter a higher value', CCP_DOMAIN ),
+			'error'	=> __( 'Error! Please enter a higher value', AFP_DOMAIN ),
 		];
 
 		/*
@@ -116,8 +116,8 @@ class CCP_Sample_Field extends acf_field {
 		*/
 
 		acf_render_field_setting( $field, [
-			'label'        => __( 'Sample Field: Font Size', CCP_DOMAIN ),
-			'instructions' => __( 'Customize the input font size', CCP_DOMAIN ),
+			'label'        => __( 'Sample Field: Font Size', AFP_DOMAIN ),
+			'instructions' => __( 'Customize the input font size', AFP_DOMAIN ),
 			'type'         => 'number',
 			'name'         => 'font_size',
 			'prepend'      => 'px',
@@ -148,7 +148,7 @@ class CCP_Sample_Field extends acf_field {
 		*/
 		echo sprintf(
 			'<p>%1s</p>',
-			esc_html__( 'This shows all data available from this field. Remove this from the sample field class when testing is complete.', CCP_DOMAIN )
+			esc_html__( 'This shows all data available from this field. Remove this from the sample field class when testing is complete.', AFP_DOMAIN )
 		);
 		echo '<pre>';
 			print_r( $field );
@@ -188,13 +188,13 @@ class CCP_Sample_Field extends acf_field {
 
 
 		// register & include JS
-		wp_register_script(CCP_DOMAIN, "{$url}assets/js/input.js", array('acf-input'), $version);
-		wp_enqueue_script(CCP_DOMAIN);
+		wp_register_script(AFP_DOMAIN, "{$url}assets/js/input.js", array('acf-input'), $version);
+		wp_enqueue_script(AFP_DOMAIN);
 
 
 		// register & include CSS
-		wp_register_style(CCP_DOMAIN, "{$url}assets/css/input.css", array('acf-input'), $version);
-		wp_enqueue_style(CCP_DOMAIN);
+		wp_register_style(AFP_DOMAIN, "{$url}assets/css/input.css", array('acf-input'), $version);
+		wp_enqueue_style(AFP_DOMAIN);
 
 	}
 
@@ -442,7 +442,7 @@ class CCP_Sample_Field extends acf_field {
 		// Advanced usage
 		if( $value < $field['custom_minimum_setting'] )
 		{
-			$valid = __('The value is too little!',CCP_DOMAIN),
+			$valid = __('The value is too little!',AFP_DOMAIN),
 		}
 
 
@@ -555,4 +555,4 @@ class CCP_Sample_Field extends acf_field {
 }
 
 // Run the class.
-new CCP_Sample_Field();
+new AFP_Sample_Field();
