@@ -68,9 +68,44 @@ final class Init {
 		remove_filter( 'the_content', 'capital_P_dangit', 11 );
 		remove_filter( 'comment_text', 'capital_P_dangit', 31 );
 
-		// Load classes to extend plugins.
-		add_action( 'init', [ $this, 'plugin_support' ] );
+		// Remove blog.
+		add_action( 'admin_menu', [ $this, 'remove_default_post_type' ] );
+		add_action( 'admin_bar_menu', [ $this, 'remove_default_post_type_menu_bar' ], 999 );
+		add_action( 'wp_dashboard_setup', [ $this, 'remove_draft_widget' ], 999 );
 
+	}
+
+	/**
+	 * Remove posts from admin menu
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function remove_default_post_type() {
+		remove_menu_page( 'edit.php' );
+	}
+
+	/**
+	 * Remove posts from admin toolbar
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function remove_default_post_type_menu_bar( $wp_admin_bar ) {
+		$wp_admin_bar->remove_node( 'new-post' );
+	}
+
+	/**
+	 * Remove post quick draft
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function remove_draft_widget(){
+		remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
 	}
 
 	/**
@@ -94,54 +129,11 @@ final class Init {
 		// Various media and media library functionality.
 		require_once AFP_PATH . 'includes/media/class-media.php';
 
-		/**
-		 * Register custom editor blocks.
-		 *
-		 * @todo Remove conditional statement when Gutenberg is in core?
-		 */
-		if ( afp_acf_pro() ) {
-			$editor = get_field( 'afp_classic_editor', 'option' );
-		} else {
-			$editor = get_option( 'afp_classic_editor' );
-		}
-		if ( ( afp_classicpress() || afp_new_cms() ) && ! $editor || is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
-			require_once AFP_PATH . 'includes/editor-blocks/class-register-block-types.php';
-		}
+		// Remove comments.
+		require_once AFP_PATH . 'includes/class-remove-comments.php';
 
 		// Post types and taxonomies.
 		require_once AFP_PATH . 'includes/post-types-taxes/class-post-type-tax.php';
-
-		// User funtionality.
-		require_once AFP_PATH . 'includes/users/class-users.php';
-
-		// Dev and maintenance tools.
-		require_once AFP_PATH . 'includes/tools/class-tools.php';
-
-	}
-
-	/**
-	 * Load classes to extend plugins.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return void
-	 */
-	public function plugin_support() {
-
-		// Add Advanced Custom Fields Support.
-		if ( afp_acf() ) {
-			include_once AFP_PATH . 'includes/acf/class-extend-acf.php';
-		}
-
-		// Add Beaver Builder support.
-		if ( class_exists( 'FLBuilder' ) ) {
-			include_once AFP_PATH . 'includes/beaver/class-beaver-builder.php';
-		}
-
-		// Add Elementor support.
-		if ( class_exists( '\Elementor\Plugin' ) ) {
-			include_once AFP_PATH . 'includes/elementor/class-elementor.php';
-		}
 
 	}
 
