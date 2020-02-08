@@ -1,12 +1,13 @@
 /**
  * Custom dashboard styles.
  */
+
 #dashboard_right_now .post-count.project-count a:before,
 #dashboard_right_now .post-count.project-count span:before {
-  content: '\f480';
+    content: '\f480';
 }
 
 #dashboard_right_now .post-count.artwork-count a:before,
 #dashboard_right_now .post-count.artwork-count span:before {
-  content: '\f309';
+    content: '\f309';
 }
