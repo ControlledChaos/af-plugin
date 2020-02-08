@@ -70,24 +70,8 @@ class Admin_Menu {
 
         }
 
-        /**
-         * Show/Hide Links Manager link.
-         */
-
-        // Get links option.
-        if ( afp_acf_options() ) {
-            $links = get_field( 'afp_links_manager', 'option' );
-        } else {
-            $links = get_option( 'afp_hide_links' );
-        }
-
-        // Return links filter.
-        if ( $links ) {
-            add_filter( 'pre_option_link_manager_enabled', '__return_true' );
-        } else {
-            add_filter( 'pre_option_link_manager_enabled', '__return_false' );
-        }
-
+        // Hide Links Manager link.
+        add_filter( 'pre_option_link_manager_enabled', '__return_false' );
 
         // Move the Menus & Widgets menu items.
         add_action( 'admin_menu', [ $this, 'menus_widgets' ] );

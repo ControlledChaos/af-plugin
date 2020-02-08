@@ -86,9 +86,6 @@ class Dashboard {
 	 */
 	private function dependencies() {
 
-        // Get the dashboard widget class.
-        require AFP_PATH . 'admin/dashboard/class-dashboard-widget.php';
-
         // Get the welcome panel class.
         require AFP_PATH . 'admin/dashboard/class-welcome.php';
 
@@ -181,21 +178,11 @@ class Dashboard {
                 remove_action( 'welcome_panel', 'wp_welcome_panel' );
             }
 
-            // Hide the try Gutenberg panel.
-            $editor = get_field( 'afp_classic_editor', 'option' );
-            if ( ( $hide && in_array( 'gutenberg', $hide ) ) || $editor ) {
-                remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );
-            }
-
             // Hide the WordPress News widget.
-            if ( $hide && in_array( 'news', $hide ) ) {
-                unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
-            }
+            unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
 
             // Hide Quick Draft (QuickPress) widget.
-            if ( $hide && in_array( 'quick', $hide ) ) {
-                unset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press'] );
-            }
+            unset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press'] );
 
             // Hide At a Glance widget.
             if ( $hide && in_array( 'at_glance', $hide ) ) {
@@ -203,9 +190,7 @@ class Dashboard {
             }
 
             // Hide Activity widget.
-            if ( $hide && in_array( 'activity', $hide ) ) {
-                remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
-            }
+            remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
 
         // If Advanced Custom Fields is not active.
         } else {
@@ -216,8 +201,6 @@ class Dashboard {
 
             // Get options.
             $welcome    = get_option( 'afp_hide_welcome' );
-            $gutenberg  = get_option( 'afp_hide_try_gutenberg' );
-            $editor     = get_option( 'afp_classic_editor' );
             $wp_news    = get_option( 'afp_hide_wp_news' );
             $quickpress = get_option( 'afp_hide_quickpress' );
             $at_glance  = get_option( 'afp_hide_at_glance' );
@@ -228,20 +211,11 @@ class Dashboard {
                 remove_action( 'welcome_panel', 'wp_welcome_panel' );
             }
 
-            // Hide the try Gutenberg panel.
-            if ( $gutenberg || $editor ) {
-                remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );
-            }
-
             // Hide the WordPress News widget.
-            if ( $wp_news ) {
-                unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
-            }
+            unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
 
             // Hide Quick Draft (QuickPress) widget.
-            if ( $quickpress ) {
-                unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
-            }
+            unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
 
             // Hide At a Glance widget.
             if ( $at_glance ) {
@@ -249,9 +223,7 @@ class Dashboard {
             }
 
             // Hide Activity widget.
-            if ( $activity ) {
-                remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
-            }
+            remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
 
         }
 
@@ -315,14 +287,6 @@ class Dashboard {
 			'callback' => [ $this, 'help_welcome_panel' ]
         ] );
 
-        // Dashboard widget tab.
-		$screen->add_help_tab( [
-			'id'       => 'help_dashboard_widgets',
-			'title'    => __( 'Dashboard Widgets', 'af-plugin' ),
-			'content'  => null,
-			'callback' => [ $this, 'help_dashboard_widgets' ]
-		] );
-
         // Add a new sidebar.
 		$screen->set_help_sidebar(
 			$this->help_dashboard_sidebar()
@@ -338,17 +302,6 @@ class Dashboard {
 	public function help_welcome_panel() {
 
         include_once AFP_PATH . 'admin/dashboard/partials/help/help-welcome-panel.php';
-
-    }
-
-    /**
-     * Get dashboard widget help tab content.
-	 *
-	 * @since      1.0.0
-     */
-	public function help_dashboard_widgets() {
-
-        include_once AFP_PATH . 'admin/dashboard/partials/help/help-dashboard-widgets.php';
 
     }
 

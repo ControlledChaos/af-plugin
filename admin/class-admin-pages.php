@@ -57,8 +57,12 @@ class Admin_Pages {
 	 */
     public function __construct() {
 
+		// Disable Site Health page.
+		add_action( 'admin_menu', [ $this, 'remove_site_health_menu' ] );
+		add_action( 'current_screen', [ $this, 'block_site_health_access' ] );
+
         // Add an about page for the plugin.
-        add_action( 'admin_menu', [ $this, 'about_plugin' ] );
+        // add_action( 'admin_menu', [ $this, 'about_plugin' ] );
 
         // Add admin header.
         if ( afp_acf_options() ) {
@@ -109,7 +113,41 @@ class Admin_Pages {
             add_action( 'manage_pages_custom_column', [ $this, 'image_column_content' ], 10, 2 );
         }
 
-    }
+	}
+
+	/**
+	 * Remove the Site Health page from menu
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function remove_site_health_menu() {
+		remove_submenu_page( 'tools.php', 'site-health.php' );
+	}
+
+	/**
+	 * Redirect Site Health if accessed directly
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function block_site_health_access() {
+
+		if ( is_admin() ) {
+
+			$screen = get_current_screen();
+
+			// If screen id is site health.
+			if ( 'site-health' == $screen->id ) {
+				wp_redirect( admin_url() );
+				exit;
+			}
+
+		}
+
+	}
 
     /**
      * Add an about page for the plugin.

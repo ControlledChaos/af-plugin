@@ -58,26 +58,6 @@ class Dashboard_Callbacks {
 	public function __construct() {}
 
 	/**
-	 * Hide try Gutenberg panel.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  array $args Extra arguments passed into the callback function.
-	 * @return string
-	 */
-	public function hide_try_gutenberg( $args ) {
-
-		$option = get_option( 'afp_hide_try_gutenberg' );
-
-		$html = '<p><input type="checkbox" id="afp_hide_try_gutenberg" name="afp_hide_try_gutenberg" value="1" ' . checked( 1, $option, false ) . '/>';
-
-		$html .= '<label for="afp_hide_try_gutenberg"> '  . $args[0] . '</label></p>';
-
-		echo $html;
-
-	}
-
-	/**
 	 * Use custom welcome panel.
 	 *
 	 * @since  1.0.0

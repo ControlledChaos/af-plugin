@@ -88,41 +88,7 @@ class Meta_Description {
 			$tagline_desc = '';
 		}
 
-		/**
-		 * Check for the Advanced Custom Fields PRO plugin or the Options Page
-		 * addon for free ACF. If there is a blog page description from the ACF
-		 * 'Site Settings' page the we'll use that, otherwise we'll look for a
-		 * description on the standard 'Site Settings' page.
-		 */
-		if ( afp_acf_options() ) {
-
-			/**
-			 * Check for content in the ACF blog description field.
-			 *
-			 * An additional parameter of 'option' must be included to target the options page.
-			 */
-			$acf_blog_desc = get_field( 'afp_meta_blog_description', 'option' );
-
-			// If the ACF field is empty use the tagline.
-			if ( $acf_blog_desc ) {
-				$blog_desc = $acf_blog_desc;
-			} else {
-				$blog_desc = $tagline_desc;
-			}
-
-		} else {
-
-			// Check for content in the blog description standard field.
-			$wp_blog_desc = get_option( 'afp_meta_blog_description' );
-
-			// If the settings field is empty use the tagline.
-			if ( $wp_blog_desc ) {
-				$blog_desc = $wp_blog_desc;
-			} else {
-				$blog_desc = $tagline_desc;
-			}
-
-		}
+		$blog_desc = $tagline_desc;
 
 		// For search pages, get the terms of the search query.
 		$search_query     = get_search_query();

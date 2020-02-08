@@ -1,6 +1,6 @@
 <?php
 /**
- * Register taxonomies.
+ * Register types.
  *
  * @package    AF_Plugin
  * @subpackage Includes\Post_Types_Taxes
@@ -19,7 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Register taxonomies.
+ * Register types.
  *
  * @since  1.0.0
  * @access public
@@ -35,13 +35,13 @@ final class Taxes_Register {
 	 */
 	public function __construct() {
 
-        // Register custom taxonomies.
+        // Register custom types.
 		add_action( 'init', [ $this, 'register' ] );
 
 	}
 
     /**
-     * Register custom taxonomies.
+     * Register custom types.
      *
      * @since  1.0.0
 	 * @access public
@@ -50,66 +50,58 @@ final class Taxes_Register {
     public function register() {
 
         /**
-         * Taxonomy: Sample taxonomy (Taxonomy).
-         *
-         * Renaming:
-         * Search case "Taxonomy" and replace with your post type singular name.
-         * Search case "Taxonomies" and replace with your post type plural name.
-         * Search case "afp_taxonomy" and replace with your taxonomy database name.
-         * Search case "taxonomies" and replace with your taxonomy permalink slug.
+         * Project Types
          */
 
         $labels = [
-            'name'                       => __( 'Taxonomies', 'af-plugin' ),
-            'singular_name'              => __( 'Taxonomy', 'af-plugin' ),
-            'menu_name'                  => __( 'Taxonomy', 'af-plugin' ),
-            'all_items'                  => __( 'All Taxonomies', 'af-plugin' ),
-            'edit_item'                  => __( 'Edit Taxonomy', 'af-plugin' ),
-            'view_item'                  => __( 'View Taxonomy', 'af-plugin' ),
-            'update_item'                => __( 'Update Taxonomy', 'af-plugin' ),
-            'add_new_item'               => __( 'Add New Taxonomy', 'af-plugin' ),
-            'new_item_name'              => __( 'New Taxonomy', 'af-plugin' ),
-            'parent_item'                => __( 'Parent Taxonomy', 'af-plugin' ),
-            'parent_item_colon'          => __( 'Parent Taxonomy', 'af-plugin' ),
-            'popular_items'              => __( 'Popular Taxonomies', 'af-plugin' ),
-            'separate_items_with_commas' => __( 'Separate Taxonomies with commas', 'af-plugin' ),
-            'add_or_remove_items'        => __( 'Add or Remove Taxonomies', 'af-plugin' ),
-            'choose_from_most_used'      => __( 'Choose from the most used Taxonomies', 'af-plugin' ),
-            'not_found'                  => __( 'No Taxonomies Found', 'af-plugin' ),
-            'no_terms'                   => __( 'No Taxonomies', 'af-plugin' ),
-            'items_list_navigation'      => __( 'Taxonomies List Navigation', 'af-plugin' ),
-            'items_list'                 => __( 'Taxonomies List', 'af-plugin' )
+            'name'                       => __( 'Types', 'af-plugin' ),
+            'singular_name'              => __( 'Type', 'af-plugin' ),
+            'menu_name'                  => __( 'Project Types', 'af-plugin' ),
+            'all_items'                  => __( 'All Types', 'af-plugin' ),
+            'edit_item'                  => __( 'Edit Type', 'af-plugin' ),
+            'view_item'                  => __( 'View Type', 'af-plugin' ),
+            'update_item'                => __( 'Update Type', 'af-plugin' ),
+            'add_new_item'               => __( 'Add New Type', 'af-plugin' ),
+            'new_item_name'              => __( 'New Type', 'af-plugin' ),
+            'parent_item'                => __( 'Parent Type', 'af-plugin' ),
+            'parent_item_colon'          => __( 'Parent Type', 'af-plugin' ),
+            'popular_items'              => __( 'Popular Types', 'af-plugin' ),
+            'separate_items_with_commas' => __( 'Separate Types with commas', 'af-plugin' ),
+            'add_or_remove_items'        => __( 'Add or Remove Types', 'af-plugin' ),
+            'choose_from_most_used'      => __( 'Choose from the most used Types', 'af-plugin' ),
+            'not_found'                  => __( 'No Types Found', 'af-plugin' ),
+            'no_terms'                   => __( 'No Types', 'af-plugin' ),
+            'items_list_navigation'      => __( 'Types List Navigation', 'af-plugin' ),
+            'items_list'                 => __( 'Types List', 'af-plugin' )
         ];
 
         $options = [
-            'label'                 => __( 'Taxonomies', 'af-plugin' ),
+            'label'                 => __( 'Types', 'af-plugin' ),
             'labels'                => $labels,
             'public'                => true,
             'hierarchical'          => false,
-            'label'                 => 'Taxonomies',
+            'label'                 => 'Types',
             'show_ui'               => true,
             'show_in_menu'          => true,
             'show_in_nav_menus'     => true,
             'query_var'             => true,
             'rewrite'               => [
-                'slug'         => 'taxonomies',
+                'slug'         => 'types',
                 'with_front'   => true,
                 'hierarchical' => false,
             ],
             'show_admin_column'     => true,
             'show_in_rest'          => false,
-			'rest_base'             => 'taxonomies',
+			'rest_base'             => 'types',
 			'rest_controller_class' => 'WP_REST_Terms_Controller',
             'show_in_quick_edit'    => true
         ];
 
-        /**
-         * Register the taxonomy
-         */
+        // Register the taxonomy.
         register_taxonomy(
-            'afp_taxonomy',
+            'project_type',
             [
-                'afp_post_type' // Change to your post type name.
+                'project'
             ],
             $options
         );

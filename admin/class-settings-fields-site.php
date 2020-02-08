@@ -107,7 +107,6 @@ class Settings_Fields_Site {
 
 		$defaults = [
 			'custom_welcome'      => false,
-			'try_gutenberg'       => false,
 			'welcome'             => false,
 			'dismiss'             => false,
 			'wp_news'             => false,

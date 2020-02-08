@@ -61,7 +61,7 @@ final class Post_Types_Register {
             'name'                  => __( 'Projects', 'af-plugin' ),
             'singular_name'         => __( 'Project', 'af-plugin' ),
             'menu_name'             => __( 'Projects', 'af-plugin' ),
-            'all_items'             => __( 'All Projects', 'af-plugin' ),
+            'all_items'             => __( 'Manage Projects', 'af-plugin' ),
             'add_new'               => __( 'Add New', 'af-plugin' ),
             'add_new_item'          => __( 'Add New Project', 'af-plugin' ),
             'edit_item'             => __( 'Edit Project', 'af-plugin' ),
@@ -111,7 +111,7 @@ final class Post_Types_Register {
             ],
             'query_var'           => 'project',
             'menu_position'       => 5,
-            'menu_icon'           => 'dashicons-format-video',
+            'menu_icon'           => 'dashicons-archive',
             'supports'            => [
                 'title',
                 'editor',
@@ -126,118 +126,17 @@ final class Post_Types_Register {
                 'post-formats'
             ],
             'taxonomies'          => [
-                'category',
-                'post_tag',
-                'afp_taxonomy' // Change to your custom taxonomy name.
+                'project_type' // Change to your custom taxonomy name.
             ],
         ];
 
         // Apply a filter to arguments for customization.
         $options = apply_filters( 'project_args', $options );
 
-        /**
-         * Register the post type
-         *
-         * Maximum 20 characters, cannot contain capital letters or spaces.
-         */
-        register_post_type(
-            'project',
-            $options
-		);
+        // Register the post type.
+        register_post_type( 'project', $options );
 
 		/**
-         * Post Type: Stage Projects
-         */
-
-        $labels = [
-            'name'                  => __( 'Stage Projects', 'af-plugin' ),
-            'singular_name'         => __( 'Stage Project', 'af-plugin' ),
-            'menu_name'             => __( 'Stage Projects', 'af-plugin' ),
-            'all_items'             => __( 'All Stage Projects', 'af-plugin' ),
-            'add_new'               => __( 'Add New', 'af-plugin' ),
-            'add_new_item'          => __( 'Add New Stage Project', 'af-plugin' ),
-            'edit_item'             => __( 'Edit Stage Project', 'af-plugin' ),
-            'new_item'              => __( 'New Stage Project', 'af-plugin' ),
-            'view_item'             => __( 'View Stage Project', 'af-plugin' ),
-            'view_items'            => __( 'View Stage Projects', 'af-plugin' ),
-            'search_items'          => __( 'Search Stage Projects', 'af-plugin' ),
-            'not_found'             => __( 'No Stage Projects Found', 'af-plugin' ),
-            'not_found_in_trash'    => __( 'No Stage Projects Found in Trash', 'af-plugin' ),
-            'parent_item_colon'     => __( 'Parent Stage Project', 'af-plugin' ),
-            'featured_image'        => __( 'Featured image for this stage project', 'af-plugin' ),
-            'set_featured_image'    => __( 'Set featured image for this stage project', 'af-plugin' ),
-            'remove_featured_image' => __( 'Remove featured image for this stage project', 'af-plugin' ),
-            'use_featured_image'    => __( 'Use as featured image for this stage project', 'af-plugin' ),
-            'archives'              => __( 'Stage Project archives', 'af-plugin' ),
-            'insert_into_item'      => __( 'Insert into Stage Project', 'af-plugin' ),
-            'uploaded_to_this_item' => __( 'Uploaded to this Stage Project', 'af-plugin' ),
-            'filter_items_list'     => __( 'Filter Stage Projects', 'af-plugin' ),
-            'items_list_navigation' => __( 'Stage Projects list navigation', 'af-plugin' ),
-            'items_list'            => __( 'Stage Projects List', 'af-plugin' ),
-            'attributes'            => __( 'Stage Project Attributes', 'af-plugin' ),
-            'parent_item_colon'     => __( 'Parent Stage Project', 'af-plugin' ),
-        ];
-
-        // Apply a filter to labels for customization.
-        $labels = apply_filters( 'stage_labels', $labels );
-
-        $options = [
-            'label'               => __( 'Stage Projects', 'af-plugin' ),
-            'labels'              => $labels,
-            'description'         => __( 'Custom post type description.', 'af-plugin' ),
-            'public'              => true,
-            'publicly_queryable'  => true,
-            'show_ui'             => true,
-            'show_in_rest'        => false,
-            'rest_base'           => 'stage_rest_api',
-            'has_archive'         => true,
-            'show_in_menu'        => true,
-			'exclude_from_search' => false,
-			// Sets user role levels, accepts array: 'capabilities'        => [],
-            'capability_type'     => 'post',
-            'map_meta_cap'        => true,
-            'hierarchical'        => false,
-            'rewrite'             => [
-                'slug'       => 'stage',
-                'with_front' => true
-            ],
-            'query_var'           => 'stage',
-            'menu_position'       => 5,
-            'menu_icon'           => 'dashicons-groups',
-            'supports'            => [
-                'title',
-                'editor',
-                'thumbnail',
-                'excerpt',
-                'trackbacks',
-                'custom-fields',
-                'comments',
-                'revisions',
-                'author',
-                'page-attributes',
-                'post-formats'
-            ],
-            'taxonomies'          => [
-                'category',
-                'post_tag',
-                'afp_taxonomy' // Change to your custom taxonomy name.
-            ],
-        ];
-
-        // Apply a filter to arguments for customization.
-        $options = apply_filters( 'stage_args', $options );
-
-        /**
-         * Register the post type
-         *
-         * Maximum 20 characters, cannot contain capital letters or spaces.
-         */
-        register_post_type(
-            'stage',
-            $options
-		);
-
-				/**
          * Post Type: Illustrations
          */
 
@@ -245,7 +144,7 @@ final class Post_Types_Register {
             'name'                  => __( 'Illustrations', 'af-plugin' ),
             'singular_name'         => __( 'Illustration', 'af-plugin' ),
             'menu_name'             => __( 'Illustrations', 'af-plugin' ),
-            'all_items'             => __( 'All Illustrations', 'af-plugin' ),
+            'all_items'             => __( 'Manage Illustrations', 'af-plugin' ),
             'add_new'               => __( 'Add New', 'af-plugin' ),
             'add_new_item'          => __( 'Add New Illustration', 'af-plugin' ),
             'edit_item'             => __( 'Edit Illustration', 'af-plugin' ),
@@ -310,24 +209,15 @@ final class Post_Types_Register {
                 'post-formats'
             ],
             'taxonomies'          => [
-                'category',
-                'post_tag',
-                'afp_taxonomy' // Change to your custom taxonomy name.
+                'category'
             ],
         ];
 
         // Apply a filter to arguments for customization.
         $options = apply_filters( 'artwork_args', $options );
 
-        /**
-         * Register the post type
-         *
-         * Maximum 20 characters, cannot contain capital letters or spaces.
-         */
-        register_post_type(
-            'artwork',
-            $options
-        );
+        // Register the post type.
+        // register_post_type( 'artwork', $options );
 
     }
 

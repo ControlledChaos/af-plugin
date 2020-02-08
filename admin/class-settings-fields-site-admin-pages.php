@@ -105,21 +105,6 @@ class Settings_Fields_Site_Admin_Pages {
 			'afp-site-admin-pages'
 		);
 
-		// Restore the TinyMCE editor.
-		add_settings_field(
-			'afp_classic_editor',
-			__( 'Classic Editor', 'af-plugin' ),
-			[ Partials\Field_Callbacks\Admin_Pages_Callbacks::instance(), 'classic_editor' ],
-			'afp-site-admin-pages',
-			'afp-site-admin-pages',
-			[ esc_html__( 'Disable the block editor (a.k.a. Gutenberg) and restore the TinyMCE editor.', 'af-plugin' ) ]
-		);
-
-		register_setting(
-			'afp-site-admin-pages',
-			'afp_classic_editor'
-		);
-
 		// Use the admin header.
 		add_settings_field(
 			'afp_use_admin_header',

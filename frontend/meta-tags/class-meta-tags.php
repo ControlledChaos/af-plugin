@@ -99,21 +99,11 @@ class Meta_Tags {
 	 */
 	public function meta_tags() {
 
-		if ( afp_acf_options() ) {
-			$disable_tags = get_field( 'afp_meta_disable_tags', 'option' );
-		} else {
-			$disable_tags = get_option( 'afp_meta_disable' );
-		}
-
-		if ( ! $disable_tags || false == $disable_tags ) {
-
-			include_once AFP_PATH . 'frontend/meta-tags/meta-tags-standard.php';
-			include_once AFP_PATH . 'frontend/meta-tags/meta-tags-schema.php';
-			include_once AFP_PATH . 'frontend/meta-tags/meta-tags-open-graph.php';
-			include_once AFP_PATH . 'frontend/meta-tags/meta-tags-twitter.php';
-			include_once AFP_PATH . 'frontend/meta-tags/meta-tags-dublin-core.php';
-
-		}
+		include_once AFP_PATH . 'frontend/meta-tags/meta-tags-standard.php';
+		include_once AFP_PATH . 'frontend/meta-tags/meta-tags-schema.php';
+		include_once AFP_PATH . 'frontend/meta-tags/meta-tags-open-graph.php';
+		include_once AFP_PATH . 'frontend/meta-tags/meta-tags-twitter.php';
+		include_once AFP_PATH . 'frontend/meta-tags/meta-tags-dublin-core.php';
 
 	}
 

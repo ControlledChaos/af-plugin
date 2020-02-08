@@ -124,16 +124,6 @@ class Admin {
 			include_once AFP_PATH . 'admin/class-settings-fields-site-acf.php';
 		}
 
-		// Restore the TinyMCE editor.
-		if ( afp_acf_pro() ) {
-			$editor = get_field( 'afp_classic_editor', 'option' );
-		} else {
-			$editor = get_option( 'afp_classic_editor' );
-		}
-		if ( ( afp_classicpress() || afp_new_cms() ) && $editor ) {
-			include_once AFP_PATH . 'admin/classic-editor/classic-editor.php';
-		}
-
 		// Functions for dasboard widgets, excluding the welcome panel.
 		require_once AFP_PATH . 'admin/dashboard/class-dashboard.php';
 
@@ -270,102 +260,13 @@ class Admin {
 		// Get the name of the site from Settings > General.
 		$site = get_bloginfo( 'name' );
 
-		/**
-		 * Default message by CMS.
-		 *
-		 * The default message vaies whether WordPress or ClassicPress is used.
-		 *
-		 * @since  1.0.0
-		 */
-
-		// If the site is running ClassicPress.
-		if ( afp_classicpress() ) {
-			$default = __( 'website powered by ClassicPress', 'af-plugin' );
-
-		// If the site is running WordPress.
-		} else {
-			$default = __( 'website powered by WordPress', 'af-plugin' );
-		}
-
-		/**
-		 * If the Advanced Custom Fields Pro plugin is active then
-		 * we use the input from the fields on the ACF options page.
-		 *
-		 * @since  1.0.0
-		 */
-		if ( afp_acf_options() ) {
-
-			/**
-			 * Get the fields registered by this plugin. An additional parameter
-			 * of 'option' must be included to target the options page.
-			 */
-			$credit = get_field( 'afp_admin_footer_credit', 'option' );
-			$link   = get_field( 'afp_admin_footer_link', 'option' );
-
-			// If a name and a URL are provided.
-			if ( $credit && $link ) {
-				$footer = sprintf(
-					'%1s %2s <a href="%3s" rel="nofollow" target="_blank">%4s</a>. ',
-					$site,
-					esc_html__( 'website designed & developed by', 'af-plugin' ),
-					esc_url( $link ),
-					$credit
-				);
-			// If only a name is provided.
-			} elseif ( $credit ) {
-				$footer = sprintf(
-					'%1s %2s %3s. ',
-					$site,
-					esc_html__( 'website designed & developed by', 'af-plugin' ),
-					$credit
-				);
-			// If no input we use the name of the site.
-			} else {
-				$footer = sprintf(
-					'%1s %2s. ',
-					$site,
-					esc_html__( $default )
-				);
-			}
-
-		/**
-		 * If the Advanced Custom Fields Pro plugin is not active then
-		 * we use the input from the fields on the WordPress/ClassicPress options page.
-		 *
-		 * @since  1.0.0
-		 */
-		} else {
-
-			$credit = sanitize_text_field( get_option( 'afp_footer_credit' ) );
-			$link   = esc_url_raw( get_option( 'afp_footer_link' ) );
-
-			// If a name and a URL are provided.
-			if ( $credit && $link ) {
-				$footer = sprintf(
-					'%1s %2s <a href="%3s" rel="nofollow" target="_blank">%4s</a>. ',
-					$site,
-					esc_html__( 'website designed & developed by', 'af-plugin' ),
-					esc_url( $link ),
-					$credit
-				);
-			// If only a name is provided.
-			} elseif ( $credit ) {
-				$footer = sprintf(
-					'%1s %2s %3s. ',
-					$site,
-					esc_html__( 'website designed & developed by', 'af-plugin' ),
-					$credit
-				);
-			// If no input we use the name of the site.
-			} else {
-				$footer = sprintf(
-					'%1s %2s. ',
-					$site,
-					esc_html__( $default )
-				);
-			}
-
-		}
+		$footer = sprintf(
+			'%1s %2s <a href="%3s" rel="nofollow" target="_blank">%4s</a>. ',
+			$site,
+			esc_html__( 'website designed & developed by', 'af-plugin' ),
+			esc_url( 'https://ccdzine.com' ),
+			'Controlled Chaos Design'
+		);
 
 		// Apply a filter for unforseen possibilities.
 		$admin_footer = apply_filters( 'afp_admin_footer', $footer );

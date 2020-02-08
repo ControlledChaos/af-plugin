@@ -87,7 +87,6 @@ class Meta_Image {
 		if ( afp_acf_options() ) {
 
 			// Get the ACF image fields.
-			$blog_image    = get_field( 'afp_meta_blog_image', 'option' );
 			$default_image = get_field( 'afp_meta_default_image', 'option' );
 
 			/**
@@ -100,12 +99,12 @@ class Meta_Image {
 			 */
 
 			// If in the blog index and if the Blog Image field is not empty.
-			if ( is_home() && ! empty( $blog_image ) && is_array( $blog_image ) ) {
+			if ( is_home() && ! empty( $default_image ) && is_array( $default_image ) ) {
 				$size  = 'Meta Image';
-				$src   = $blog_image['sizes'][ $size ];
+				$src   = $default_image['sizes'][ $size ];
 
 			// If in an archive and if the Default Image field is not empty.
-			} elseif ( is_archive() && ! empty( $default_image ) && is_array( $blog_image ) ) {
+			} elseif ( is_archive() && ! empty( $default_image ) && is_array( $default_image ) ) {
 				$size  = 'Meta Image';
 				$src   = $default_image['sizes'][ $size ];
 

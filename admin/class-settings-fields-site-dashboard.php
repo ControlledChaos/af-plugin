@@ -122,21 +122,6 @@ class Settings_Fields_Site_Dashboard {
 			'afp_custom_welcome'
 		);
 
-		// Hide the try Gutenberg panel.
-		add_settings_field(
-			'afp_hide_try_gutenberg',
-			__( 'Hide Try Gutenberg', 'af-plugin' ),
-			[ Callbacks::instance(), 'hide_try_gutenberg' ],
-			'afp-site-dashboard',
-			'afp-site-dashboard',
-			[ esc_html__( 'Hide the "Try Gutenberg" panel on the Dashboard', 'af-plugin' ) ]
-		);
-
-		register_setting(
-			'afp-site-dashboard',
-			'afp_hide_try_gutenberg'
-		);
-
 		// Hide the welcome panel.
 		add_settings_field(
 			'afp_hide_welcome',

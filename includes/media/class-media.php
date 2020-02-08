@@ -133,6 +133,22 @@ class Media {
 	 */
 	public function image_sizes() {
 
+		// 1:1 square.
+		add_image_size( __( 'large-thumbnail', 'af-plugin' ), 240, 240, true );
+		add_image_size( __( 'xlarge-thumbnail', 'af-plugin' ), 320, 320, true );
+
+		// 16:9 HD Video.
+		add_image_size( __( 'large-video', 'af-plugin' ), 1280, 720, true );
+		add_image_size( __( 'medium-video', 'af-plugin' ), 960, 540, true );
+		add_image_size( __( 'small-video', 'af-plugin' ), 640, 360, true );
+		add_image_size( __( 'video-thumbnail', 'af-plugin' ), 320, 180, true );
+
+		// 21:9 Cinemascope.
+		add_image_size( __( 'large-banner', 'af-plugin' ), 1280, 549, true );
+		add_image_size( __( 'medium-banner', 'af-plugin' ), 960, 411, true );
+		add_image_size( __( 'small-banner', 'af-plugin' ), 640, 274, true );
+		add_image_size( __( 'banner-thumbnail', 'af-plugin' ), 320, 137, true );
+
 		// For link embedding and sharing on social sites.
 		add_image_size( __( 'meta-image', 'af-plugin' ), 1200, 630, true );
 
