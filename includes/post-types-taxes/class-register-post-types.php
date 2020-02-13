@@ -126,7 +126,7 @@ final class Post_Types_Register {
                 'post-formats'
             ],
             'taxonomies'          => [
-                'project_type' // Change to your custom taxonomy name.
+                'project_type'
             ],
         ];
 
@@ -134,7 +134,171 @@ final class Post_Types_Register {
         $options = apply_filters( 'project_args', $options );
 
         // Register the post type.
-        register_post_type( 'project', $options );
+		register_post_type( 'project', $options );
+
+		/**
+         * Post Type: Galleries
+         */
+
+        $labels = [
+            'name'                  => __( 'Galleries', 'af-plugin' ),
+            'singular_name'         => __( 'Gallery', 'af-plugin' ),
+            'menu_name'             => __( 'Galleries', 'af-plugin' ),
+            'all_items'             => __( 'Manage Galleries', 'af-plugin' ),
+            'add_new'               => __( 'Add New', 'af-plugin' ),
+            'add_new_item'          => __( 'Add New Gallery', 'af-plugin' ),
+            'edit_item'             => __( 'Edit Gallery', 'af-plugin' ),
+            'new_item'              => __( 'New Gallery', 'af-plugin' ),
+            'view_item'             => __( 'View Gallery', 'af-plugin' ),
+            'view_items'            => __( 'View Galleries', 'af-plugin' ),
+            'search_items'          => __( 'Search Galleries', 'af-plugin' ),
+            'not_found'             => __( 'No Galleries Found', 'af-plugin' ),
+            'not_found_in_trash'    => __( 'No Galleries Found in Trash', 'af-plugin' ),
+            'parent_item_colon'     => __( 'Parent Gallery', 'af-plugin' ),
+            'featured_image'        => __( 'Featured image for this gallery', 'af-plugin' ),
+            'set_featured_image'    => __( 'Set featured image for this gallery', 'af-plugin' ),
+            'remove_featured_image' => __( 'Remove featured image for this gallery', 'af-plugin' ),
+            'use_featured_image'    => __( 'Use as featured image for this gallery', 'af-plugin' ),
+            'archives'              => __( 'Gallery archives', 'af-plugin' ),
+            'insert_into_item'      => __( 'Insert into Gallery', 'af-plugin' ),
+            'uploaded_to_this_item' => __( 'Uploaded to this Gallery', 'af-plugin' ),
+            'filter_items_list'     => __( 'Filter Galleries', 'af-plugin' ),
+            'items_list_navigation' => __( 'Galleries list navigation', 'af-plugin' ),
+            'items_list'            => __( 'Galleries List', 'af-plugin' ),
+            'attributes'            => __( 'Gallery Attributes', 'af-plugin' ),
+            'parent_item_colon'     => __( 'Parent Gallery', 'af-plugin' ),
+        ];
+
+        // Apply a filter to labels for customization.
+        $labels = apply_filters( 'gallery_labels', $labels );
+
+        $options = [
+            'label'               => __( 'Galleries', 'af-plugin' ),
+            'labels'              => $labels,
+            'description'         => __( 'Custom post type description.', 'af-plugin' ),
+            'public'              => true,
+            'publicly_queryable'  => true,
+            'show_ui'             => true,
+            'show_in_rest'        => false,
+            'rest_base'           => 'gallery_rest_api',
+            'has_archive'         => true,
+            'show_in_menu'        => true,
+			'exclude_from_search' => false,
+			// Sets user role levels, accepts array: 'capabilities'        => [],
+            'capability_type'     => 'post',
+            'map_meta_cap'        => true,
+            'hierarchical'        => false,
+            'rewrite'             => [
+                'slug'       => 'gallery',
+                'with_front' => true
+            ],
+            'query_var'           => 'gallery',
+            'menu_position'       => 5,
+            'menu_icon'           => 'dashicons-format-gallery',
+            'supports'            => [
+                'title',
+                'editor',
+                'thumbnail',
+                'excerpt',
+                'trackbacks',
+                'custom-fields',
+                'comments',
+                'revisions',
+                'author',
+                'page-attributes',
+                'post-formats'
+            ],
+            'taxonomies'          => [
+                'project_type'
+            ],
+        ];
+
+        // Apply a filter to arguments for customization.
+        $options = apply_filters( 'gallery_args', $options );
+
+        // Register the post type.
+        register_post_type( 'gallery', $options );
+
+		/**
+         * Post Type: Press
+         */
+
+        $labels = [
+            'name'                  => __( 'Press', 'af-plugin' ),
+            'singular_name'         => __( 'Article', 'af-plugin' ),
+            'menu_name'             => __( 'Press', 'af-plugin' ),
+            'all_items'             => __( 'Manage Articles', 'af-plugin' ),
+            'add_new'               => __( 'Add New', 'af-plugin' ),
+            'add_new_item'          => __( 'Add New Article', 'af-plugin' ),
+            'edit_item'             => __( 'Edit Article', 'af-plugin' ),
+            'new_item'              => __( 'New Article', 'af-plugin' ),
+            'view_item'             => __( 'View Article', 'af-plugin' ),
+            'view_items'            => __( 'View Articles', 'af-plugin' ),
+            'search_items'          => __( 'Search Articles', 'af-plugin' ),
+            'not_found'             => __( 'No Articles Found', 'af-plugin' ),
+            'not_found_in_trash'    => __( 'No Articles Found in Trash', 'af-plugin' ),
+            'parent_item_colon'     => __( 'Parent Article', 'af-plugin' ),
+            'featured_image'        => __( 'Featured image for this article', 'af-plugin' ),
+            'set_featured_image'    => __( 'Set featured image for this article', 'af-plugin' ),
+            'remove_featured_image' => __( 'Remove featured image for this article', 'af-plugin' ),
+            'use_featured_image'    => __( 'Use as featured image for this article', 'af-plugin' ),
+            'archives'              => __( 'Article archives', 'af-plugin' ),
+            'insert_into_item'      => __( 'Insert into Article', 'af-plugin' ),
+            'uploaded_to_this_item' => __( 'Uploaded to this Article', 'af-plugin' ),
+            'filter_items_list'     => __( 'Filter Articles', 'af-plugin' ),
+            'items_list_navigation' => __( 'Articles list navigation', 'af-plugin' ),
+            'items_list'            => __( 'Articles List', 'af-plugin' ),
+            'attributes'            => __( 'Article Attributes', 'af-plugin' ),
+            'parent_item_colon'     => __( 'Parent Article', 'af-plugin' ),
+        ];
+
+        // Apply a filter to labels for customization.
+        $labels = apply_filters( 'press_labels', $labels );
+
+        $options = [
+            'label'               => __( 'Articles', 'af-plugin' ),
+            'labels'              => $labels,
+            'description'         => __( 'Custom post type description.', 'af-plugin' ),
+            'public'              => true,
+            'publicly_queryable'  => true,
+            'show_ui'             => true,
+            'show_in_rest'        => false,
+            'rest_base'           => 'press_rest_api',
+            'has_archive'         => true,
+            'show_in_menu'        => true,
+			'exclude_from_search' => false,
+			// Sets user role levels, accepts array: 'capabilities'        => [],
+            'capability_type'     => 'post',
+            'map_meta_cap'        => true,
+            'hierarchical'        => false,
+            'rewrite'             => [
+                'slug'       => 'press',
+                'with_front' => true
+            ],
+            'query_var'           => 'press',
+            'menu_position'       => 5,
+            'menu_icon'           => 'dashicons-megaphone',
+            'supports'            => [
+                'title',
+                'editor',
+                'thumbnail',
+                'excerpt',
+                'trackbacks',
+                'custom-fields',
+                'comments',
+                'revisions',
+                'author',
+                'page-attributes',
+                'post-formats'
+            ],
+            'taxonomies'          => [],
+        ];
+
+        // Apply a filter to arguments for customization.
+        $options = apply_filters( 'press_args', $options );
+
+        // Register the post type.
+        register_post_type( 'press', $options );
 
 		/**
          * Post Type: Illustrations

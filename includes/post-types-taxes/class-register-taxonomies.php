@@ -101,7 +101,8 @@ final class Taxes_Register {
         register_taxonomy(
             'project_type',
             [
-                'project'
+				'project',
+				'gallery'
             ],
             $options
         );
