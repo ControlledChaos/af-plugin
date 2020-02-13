@@ -73,6 +73,9 @@ class Post_Types_Taxes {
 		// Resister cutsom post types.
 		require_once AFP_PATH . 'includes/post-types-taxes/class-register-post-types.php';
 
+		// Resister post type fields.
+		require_once AFP_PATH . 'admin/class-projects-fields.php';
+
 		// Resister cutsom taxonomies.
 		require_once AFP_PATH . 'includes/post-types-taxes/class-register-taxonomies.php';
 
