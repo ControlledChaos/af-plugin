@@ -490,10 +490,22 @@ class Admin_Pages {
     public function title_placeholders( $title ) {
 
         // Get the current screen as a variable.
-        $screen = get_current_screen();
+		$screen = get_current_screen();
+
+		// Post type: project.
+		if ( 'project' == $screen->post_type ) {
+			$post_title = esc_html__( 'Project Title', 'af-plugin' );
+
+		// Post type: press.
+		} elseif ( 'post' == $screen->post_type ) {
+			$post_title = esc_html__( 'Article Title', 'af-plugin' );
+
+		// Post type: gallery.
+		} elseif ( 'post' == $screen->post_type ) {
+            $post_title = esc_html__( 'Gallery Title', 'af-plugin' );
 
         // Post type: post.
-        if ( 'post' == $screen->post_type ) {
+		} elseif ( 'post' == $screen->post_type ) {
             $post_title = esc_html__( 'Post Title', 'af-plugin' );
 
         // Post type: page.
