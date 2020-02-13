@@ -135,13 +135,19 @@ class Media {
 
 		// 1:1 square.
 		add_image_size( __( 'large-thumbnail', 'af-plugin' ), 240, 240, true );
-		add_image_size( __( 'xlarge-thumbnail', 'af-plugin' ), 320, 320, true );
+		add_image_size( __( 'x-large-thumbnail', 'af-plugin' ), 320, 320, true );
 
 		// 16:9 HD Video.
 		add_image_size( __( 'large-video', 'af-plugin' ), 1280, 720, true );
 		add_image_size( __( 'medium-video', 'af-plugin' ), 960, 540, true );
 		add_image_size( __( 'small-video', 'af-plugin' ), 640, 360, true );
 		add_image_size( __( 'video-thumbnail', 'af-plugin' ), 320, 180, true );
+
+		// 2:3 Poster images.
+		add_image_size( __( 'poster-preview', 'af-plugin' ), 160, 240, true );
+		add_image_size( __( 'poster-small', 'af-plugin' ), 213, 320, true );
+		add_image_size( __( 'poster-medium', 'af-plugin' ), 426, 640, true );
+		add_image_size( __( 'poster-large', 'af-plugin' ), 853, 1280, true );
 
 		// 21:9 Cinemascope.
 		add_image_size( __( 'large-banner', 'af-plugin' ), 1280, 549, true );
