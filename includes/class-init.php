@@ -120,6 +120,9 @@ final class Init {
 		// Translation functionality.
 		require_once AFP_PATH . 'includes/class-i18n.php';
 
+		// Post types and taxonomies.
+		require_once AFP_PATH . 'includes/post-types-taxes/class-post-type-tax.php';
+
 		// Admin/backend functionality, scripts and styles.
 		require_once AFP_PATH . 'admin/class-admin.php';
 
@@ -131,9 +134,6 @@ final class Init {
 
 		// Remove comments.
 		require_once AFP_PATH . 'includes/class-remove-comments.php';
-
-		// Post types and taxonomies.
-		require_once AFP_PATH . 'includes/post-types-taxes/class-post-type-tax.php';
 
 	}
 
