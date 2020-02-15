@@ -114,16 +114,8 @@ final class Post_Types_Register {
             'menu_icon'           => 'dashicons-archive',
             'supports'            => [
                 'title',
-                'editor',
                 'thumbnail',
-                'excerpt',
-                'trackbacks',
-                'custom-fields',
-                'comments',
-                'revisions',
-                'author',
-                'page-attributes',
-                'post-formats'
+                'page-attributes'
             ],
             'taxonomies'          => [
                 'project_type'
@@ -200,13 +192,7 @@ final class Post_Types_Register {
                 'editor',
                 'thumbnail',
                 'excerpt',
-                'trackbacks',
-                'custom-fields',
-                'comments',
-                'revisions',
-                'author',
-                'page-attributes',
-                'post-formats'
+                'page-attributes'
             ],
             'taxonomies'          => [
                 'project_type'
@@ -225,7 +211,7 @@ final class Post_Types_Register {
 
         $labels = [
             'name'                  => __( 'Press', 'af-plugin' ),
-            'singular_name'         => __( 'Article', 'af-plugin' ),
+            'singular_name'         => __( 'Press Article', 'af-plugin' ),
             'menu_name'             => __( 'Press', 'af-plugin' ),
             'all_items'             => __( 'Manage Articles', 'af-plugin' ),
             'add_new'               => __( 'Add New', 'af-plugin' ),
@@ -280,16 +266,9 @@ final class Post_Types_Register {
             'menu_icon'           => 'dashicons-megaphone',
             'supports'            => [
                 'title',
-                'editor',
-                'thumbnail',
-                'excerpt',
-                'trackbacks',
-                'custom-fields',
-                'comments',
-                'revisions',
-                'author',
-                'page-attributes',
-                'post-formats'
+				'thumbnail',
+				'excerpt',
+                'page-attributes'
             ],
             'taxonomies'          => [],
         ];
@@ -364,13 +343,7 @@ final class Post_Types_Register {
                 'editor',
                 'thumbnail',
                 'excerpt',
-                'trackbacks',
-                'custom-fields',
-                'comments',
-                'revisions',
-                'author',
-                'page-attributes',
-                'post-formats'
+                'page-attributes'
             ],
             'taxonomies'          => [
                 'category'
