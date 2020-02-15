@@ -36,64 +36,11 @@ class Projects_Fields {
 	}
 
 	/**
-	 * Get post type context
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @return mixed
-	 */
-	public function get_current_post_type() {
-
-		// Access global variables.
-		global $post, $typenow, $current_screen;
-
-		// Return the post type for various scenarios.
-		if ( $post && $post->post_type ) {
-			return $post->post_type;
-		} elseif ( $typenow ) {
-			return $typenow;
-		} elseif ( $current_screen && $current_screen->post_type ) {
-			return $current_screen->post_type;
-		} elseif ( isset( $_REQUEST['post_type'] ) ) {
-			return sanitize_key( $_REQUEST['post_type'] );
-		}
-
-		// Return nothing if conditions aren't met.
-		return null;
-
-	}
-
-	/**
 	 * Register fields.
 	 */
 	public function fields() {
 
 		if ( function_exists( 'acf_add_local_field_group' ) ) :
-
-			// Add the Director field for projects only.
-			if ( 'project' == $this->get_current_post_type() ) {
-				$director = [
-					'key'               => 'field_5948b2c4f2275',
-					'label'             => __( 'Director', 'af-plugin' ),
-					'name'              => 'af_project_director',
-					'type'              => 'text',
-					'instructions'      => __( 'Enter only the name of the director.', 'af-plugin' ),
-					'required'          => 0,
-					'conditional_logic' => 0,
-					'wrapper'           => [
-						'width' => '',
-						'class' => '',
-						'id'    => '',
-					],
-					'default_value'     => '',
-					'placeholder'       => '',
-					'prepend'           => '',
-					'append'            => '',
-					'maxlength'         => '',
-				];
-			} else {
-				$director = null;
-			}
 
 			acf_add_local_field_group( [
 				'key'    => 'group_5948b2c4ec0dd-2',
@@ -118,7 +65,7 @@ class Projects_Fields {
 					[
 						'key'               => 'field_5dceeb578c44c',
 						'label'             => __( 'Project Title', 'af-plugin' ),
-						'name'              => 'af_project_title',
+						'name'              => 'project_title',
 						'type'              => 'text',
 						'instructions'      => __( 'This will be displayed to the public, unlike the administrative title above.', 'af-plugin' ),
 						'required'          => 0,
@@ -134,11 +81,49 @@ class Projects_Fields {
 						'append'            => '',
 						'maxlength'         => '',
 					],
-					$director,
+					[
+						'key'               => 'field_5e483aa1319e0',
+						'label'             => __( 'Client', 'af-plugin' ),
+						'name'              => 'project_client',
+						'type'              => 'text',
+						'instructions'      => __( 'Name(s) of the production company or network.', 'af-plugin' ),
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => [
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						],
+						'acfe_permissions'  => '',
+						'default_value'     => '',
+						'placeholder'       => '',
+						'prepend'           => '',
+						'append'            => '',
+						'maxlength'         => '',
+					],
+					[
+						'key'               => 'field_5948b2c4f2275',
+						'label'             => __( 'Director', 'af-plugin' ),
+						'name'              => 'project_director',
+						'type'              => 'text',
+						'instructions'      => __( 'Enter only the name of the director, if applicable.', 'af-plugin' ),
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => [
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						],
+						'default_value'     => '',
+						'placeholder'       => '',
+						'prepend'           => '',
+						'append'            => '',
+						'maxlength'         => '',
+					],
 					[
 						'key'               => 'field_5948b4fe4177e',
 						'label'             => __( 'IMDb Page', 'af-plugin' ),
-						'name'              => 'af_project_imdb_page',
+						'name'              => 'project_imdb_page',
 						'type'              => 'url',
 						'instructions'      => __( 'Paste the URL (web address) of the main page on IMBd.', 'af-plugin' ),
 						'required'          => 0,
@@ -154,7 +139,7 @@ class Projects_Fields {
 					[
 						'key'               => 'field_5948b699882a3',
 						'label'             => __( 'Description', 'af-plugin' ),
-						'name'              => 'af_project_description',
+						'name'              => 'project_description',
 						'type'              => 'textarea',
 						'instructions'      => __( 'Enter a brief description.', 'af-plugin' ),
 						'required'          => 0,
@@ -171,26 +156,28 @@ class Projects_Fields {
 						'new_lines'         => '',
 					],
 					[
-						'key'               => 'field_598256325eb95',
-						'label'             => __( 'Media', 'af-plugin' ),
+						'key'               => 'field_5e483d21d0ca2',
+						'label'             => __( 'Images', 'af-plugin' ),
 						'name'              => '',
 						'type'              => 'tab',
-						'instructions'      => '',
-						'required'          => 1,
+						'instructions'      => __( '', 'af-plugin' ),
+						'required'          => 0,
 						'conditional_logic' => 0,
 						'wrapper'           => [
 							'width' => '',
 							'class' => '',
 							'id'    => '',
 						],
+						'acfe_permissions'  => '',
 						'placement'         => 'top',
 						'endpoint'          => 0,
+						'icon_class'        => '',
+						'show_icon_only'    => 0,
 					],
-
 					[
 						'key'               => 'field_5ddc4e64349e8',
 						'label'             => __( 'Poster Image', 'af-plugin' ),
-						'name'              => 'af_poster_image',
+						'name'              => 'project_poster_image',
 						'type'              => 'image',
 						'instructions'      => __( 'The poster image uses a 2:3 aspect ratio, taller than wide. The minimum size is 426 pixels wide by 640 pixels high. Ideal is 853x1280 or greater.', 'af-plugin' ),
 						'required'          => 0,
@@ -212,11 +199,115 @@ class Projects_Fields {
 						'mime_types'        => 'jpg, jpeg, png',
 					],
 					[
+						'key'               => 'field_5e483d3195947',
+						'label'             => __( 'Image Gallery', 'af-plugin' ),
+						'name'              => 'project_gallery',
+						'type'              => 'gallery',
+						'instructions'      => __( '', 'af-plugin' ),
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => [
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						],
+						'acfe_permissions'  => '',
+						'return_format'     => 'array',
+						'preview_size'      => 'thumbnail',
+						'insert'            => 'append',
+						'library'           => 'all',
+						'min'               => '',
+						'max'               => '',
+						'min_width'         => '',
+						'min_height'        => '',
+						'min_size'          => '',
+						'max_width'         => '',
+						'max_height'        => '',
+						'max_size'          => '',
+						'mime_types'        => '',
+					],
+					[
+						'key'               => 'field_5e484cd749e10',
+						'label'             => __( 'Gallery Link', 'af-plugin' ),
+						'name'              => 'project_gallery_link',
+						'type'              => 'page_link',
+						'instructions'      => __( 'Optional gallery page related to this project.', 'af-plugin' ),
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper' => [
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						],
+						'acfe_permissions'  => '',
+						'post_type'         => [
+							0 => 'gallery',
+						],
+						'taxonomy'          => '',
+						'allow_null'        => 0,
+						'allow_archives'    => 0,
+						'multiple'          => 0,
+					],
+					[
+						'key'               => 'field_598256325eb95',
+						'label'             => __( 'Videos', 'af-plugin' ),
+						'name'              => '',
+						'type'              => 'tab',
+						'instructions'      => '',
+						'required'          => 1,
+						'conditional_logic' => 0,
+						'wrapper'           => [
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						],
+						'placement'         => 'top',
+						'endpoint'          => 0,
+					],
+					[
+						'key'               => 'field_5e482f96e5494',
+						'label'             => __( 'Video Requirements', 'af-plugin' ),
+						'name'              => '',
+						'type'              => 'message',
+						'instructions'      => '',
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => [
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						],
+						'acfe_permissions'  => '',
+						'message'           => __( 'Video field are designed to work only with videos hosted on Vimeo. Use only the basic URL of the video, no full-screen URLs or embed code.', 'af-plugin' ),
+						'new_lines'         => 'wpautop',
+						'esc_html'          => 0,
+					],
+					[
+						'key'               => 'field_5e48368887fa8',
+						'label'             => __( 'Primary Video Title', 'af-plugin' ),
+						'name'              => 'project_video_title',
+						'type'              => 'text',
+						'instructions'      => __( '', 'af-plugin' ),
+						'required'          => 0,
+						'conditional_logic' => 0,
+						'wrapper'           => [
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						],
+						'acfe_permissions'  => '',
+						'default_value'     => '',
+						'placeholder'       => '',
+						'prepend'           => '',
+						'append'            => '',
+						'maxlength'         => '',
+					],
+					[
 						'key'               => 'field_5948b2c4f2479',
-						'label'             => 'Vimeo Video URL',
-						'name'              => 'af_project_vimeo_id',
+						'label'             => __( 'Primary Video URL', 'af-plugin' ),
+						'name'              => 'project_vimeo_url',
 						'type'              => 'url',
-						'instructions'      => 'Enter the basic URL for the Vimeo video.',
+						'instructions'      => __( 'Enter the basic URL for the Vimeo video.', 'af-plugin' ),
 						'required'          => 0,
 						'conditional_logic' => 0,
 						'wrapper'           => [
@@ -228,11 +319,11 @@ class Projects_Fields {
 						'placeholder'       => 'https://vimeo.com/123456789',
 					],
 					[
-						'key'               => 'field_5a34d017a35a7',
-						'label'             => __( 'Video Image', 'af-plugin' ),
-						'name'              => 'af_video_image',
-						'type'              => 'image',
-						'instructions'      => __( 'Optional. The video image uses a 16:9 aspect ratio, the same as HD video. If no image is selected then the screenshot from Vimeo will be used. This can be used to replace an inferior image provided by Vimeo. Minimum 960 X 540 pixels.', 'af-plugin' ),
+						'key'               => 'field_5e4829feeae2a',
+						'label'             => __( 'Additional Videos', 'af-plugin' ),
+						'name'              => 'project_additional_videos',
+						'type'              => 'repeater',
+						'instructions'      => __( '', 'af-plugin' ),
 						'required'          => 0,
 						'conditional_logic' => 0,
 						'wrapper'           => [
@@ -240,16 +331,52 @@ class Projects_Fields {
 							'class' => '',
 							'id'    => '',
 						],
-						'return_format'     => 'array',
-						'preview_size'      => 'video-small',
-						'library'           => 'all',
-						'min_width'         => 960,
-						'min_height'        => 540,
-						'min_size'          => '',
-						'max_width'         => '',
-						'max_height'        => '',
-						'max_size'          => '',
-						'mime_types'        => 'jpg, jpeg, png',
+						'acfe_permissions'  => '',
+						'acfe_repeater_stylised_button' => 0,
+						'collapsed'         => '',
+						'min'               => 0,
+						'max'               => 0,
+						'layout'            => 'row',
+						'button_label'      => __( 'Add Video', 'af-plugin' ),
+						'sub_fields'        => [
+							[
+								'key'               => 'field_5e482a1beae2b',
+								'label'             => __( 'Title', 'af-plugin' ),
+								'name'              => 'project_addtional_video_title',
+								'type'              => 'text',
+								'instructions'      => __( '', 'af-plugin' ),
+								'required'          => 0,
+								'conditional_logic' => 0,
+								'wrapper' => [
+									'width' => '',
+									'class' => '',
+									'id'    => '',
+								],
+								'acfe_permissions'  => '',
+								'default_value'     => '',
+								'placeholder'       => '',
+								'prepend'           => '',
+								'append'            => '',
+								'maxlength'         => '',
+							],
+							[
+								'key'               => 'field_5e482a37eae2c',
+								'label'             => __( 'URL', 'af-plugin' ),
+								'name'              => 'project_addtional_vimeo_turl',
+								'type'              => 'url',
+								'instructions'      => __( '', 'af-plugin' ),
+								'required'          => 0,
+								'conditional_logic' => 0,
+								'wrapper' => [
+									'width' => '',
+									'class' => '',
+									'id'    => '',
+								],
+								'acfe_permissions'  => '',
+								'default_value'     => '',
+								'placeholder'       => '',
+							],
+						],
 					],
 				],
 				'location' => [
