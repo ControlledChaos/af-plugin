@@ -185,7 +185,7 @@ final class Post_Types_Register {
                 'with_front' => true
             ],
             'query_var'           => 'gallery',
-            'menu_position'       => 5,
+            'menu_position'       => 15,
             'menu_icon'           => 'dashicons-format-gallery',
             'supports'            => [
                 'title',
@@ -195,7 +195,8 @@ final class Post_Types_Register {
                 'page-attributes'
             ],
             'taxonomies'          => [
-                'project_type'
+				'project_type',
+				'post_tag'
             ],
         ];
 

@@ -19,7 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Project post type fields.
  */
-class Projects_Fields {
+class Project_Fields {
 
 	/**
 	 * Initialize the class and set its properties.
@@ -141,7 +141,7 @@ class Projects_Fields {
 						'label'             => __( 'Description', 'af-plugin' ),
 						'name'              => 'project_description',
 						'type'              => 'textarea',
-						'instructions'      => __( 'Enter a brief description.', 'af-plugin' ),
+						'instructions'      => __( 'Enter a brief description. Paragraphs automatically added with breaks between lines.', 'af-plugin' ),
 						'required'          => 0,
 						'conditional_logic' => 0,
 						'wrapper'           => [
@@ -153,7 +153,7 @@ class Projects_Fields {
 						'placeholder'       => '',
 						'maxlength'         => '',
 						'rows'              => '',
-						'new_lines'         => '',
+						'new_lines'         => 'wpautop',
 					],
 					[
 						'key'               => 'field_5e483d21d0ca2',
@@ -362,7 +362,7 @@ class Projects_Fields {
 							[
 								'key'               => 'field_5e482a37eae2c',
 								'label'             => __( 'URL', 'af-plugin' ),
-								'name'              => 'project_addtional_vimeo_turl',
+								'name'              => 'project_addtional_vimeo_url',
 								'type'              => 'url',
 								'instructions'      => __( '', 'af-plugin' ),
 								'required'          => 0,
@@ -406,8 +406,7 @@ class Projects_Fields {
 					9  => 'page_attributes',
 					10 => 'categories',
 					11 => 'tags',
-					12 => 'send-trackbacks',
-					13 => 'featured_image'
+					12 => 'send-trackbacks'
 				],
 				'active'      => 1,
 				'description' => __( 'For Projects post types.', 'af-plugin' ),
@@ -420,4 +419,4 @@ class Projects_Fields {
 }
 
 // New instance of the class.
-new Projects_Fields;
+new Project_Fields;
