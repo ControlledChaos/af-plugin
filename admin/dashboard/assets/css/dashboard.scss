@@ -7,7 +7,12 @@
     content: '\f480';
 }
 
-#dashboard_right_now .post-count.artwork-count a:before,
-#dashboard_right_now .post-count.artwork-count span:before {
-    content: '\f309';
+#dashboard_right_now .post-count.press-count a:before,
+#dashboard_right_now .post-count.press-count span:before {
+    content: '\f488';
+}
+
+#dashboard_right_now .post-count.gallery-count a:before,
+#dashboard_right_now .post-count.gallery-count span:before {
+    content: '\f161';
 }
