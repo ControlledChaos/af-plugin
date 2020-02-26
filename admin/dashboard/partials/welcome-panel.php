@@ -1,6 +1,6 @@
 <?php
 /**
- * Custom welcome panel output.
+ * Custom dashboard panel output.
  *
  * Provided are several widget areas and hooks for adding content.
  * The `do_action` hooks are named and placed to be similar to the
@@ -23,119 +23,80 @@ if ( ! defined( 'WPINC' ) ) {
 // Get the current user name for the greeting.
 $current_user = wp_get_current_user();
 $user_name    = $current_user->display_name;
-
-// Add a filterable subheading.
-$subheading = sprintf(
-	'<h3>%1s %2s %3s.</h3>',
-	esc_html__( 'This is your custom', 'af-plugin' ),
-	get_bloginfo( 'name' ),
-	esc_html__( 'welcome panel', 'af-plugin' )
-);
-$subheading = apply_filters( 'afp_welcome_subheading', $subheading );
-
-// Add a filterable description.
-$about_desc = apply_filters( 'afp_welcome_about', __( 'Put your welcome message here.', 'af-plugin' ) );
+$contact_page = get_page_by_path( 'contact' );
+$contact_id   = $contact_page->ID;
+$bio_page     = get_page_by_path( 'bio' );
+$bio_id       = $bio_page->ID;
 
 ?>
-<?php do_action( 'afp_before_welcome_panel_content' ); ?>
-<div class="welcome-panel-content custom">
-	<?php do_action( 'afp_welcome_panel_content_before' ); ?>
 
-	<?php echo sprintf(
-		'<h2 class="welcome-panel-title">%1s %2s.</h2>',
-		esc_html__( 'Welcome,', 'af-plugin' ),
-		$user_name
-	); ?>
-	<p class="welcome-panel-description"><?php echo $about_desc; ?></p>
-	<?php echo $subheading; ?>
-	<p><?php _e( 'Use this to provide handy links to manage content, informational widgets, or maybe an instructional video.' ); ?></p>
-	<p><?php _e( 'No CSS has been applied to this welcome panel. Add styles as necessary for your project.' ); ?></p>
-
-	<div class="welcome-panel-column-container">
-		<?php do_action( 'afp_welcome_panel_column_container_before' ); ?>
-
-		<div class="welcome-panel-column">
-			<?php do_action( 'afp_welcome_panel_column_first_before' ); ?>
-
-				<?php if ( is_active_sidebar( 'afp_welcome_widget_first' ) ) {
-
-					dynamic_sidebar( 'afp_welcome_widget_first' );
-
-				} else {
-
-					$placeholder = sprintf(
-						'<h3>%1s</h3>',
-						esc_html( 'Column One', 'af-plugin' )
-					);
-					$placeholder .= sprintf(
-						'<p><a href="%1s">%2s</a> %3s.</p>',
-						admin_url( 'widgets.php' ),
-						__( 'Add a widget', 'af-plugin' ),
-						__( 'to this area', 'af-plugin' )
-					);
-
-					echo $placeholder;
-
-				} ?>
-
-			<?php do_action( 'afp_welcome_panel_column_first_after' ); ?>
-		</div>
-		<div class="welcome-panel-column">
-			<?php do_action( 'afp_welcome_panel_column_second_before' ); ?>
-
-			<?php if ( is_active_sidebar( 'afp_welcome_widget_second' ) ) {
-
-					dynamic_sidebar( 'afp_welcome_widget_second' );
-
-				} else {
-
-					$placeholder = sprintf(
-						'<h3>%1s</h3>',
-						esc_html( 'Column Two', 'af-plugin' )
-					);
-					$placeholder .= sprintf(
-						'<p><a href="%1s">%2s</a> %3s.</p>',
-						admin_url( 'widgets.php' ),
-						__( 'Add a widget', 'af-plugin' ),
-						__( 'to this area', 'af-plugin' )
-					);
-
-					echo $placeholder;
-
-				} ?>
-
-			<?php do_action( 'afp_welcome_panel_column_second_after' ); ?>
-		</div>
-		<div class="welcome-panel-column welcome-panel-last">
-			<?php do_action( 'afp_welcome_panel_column_last_before' ); ?>
-
-			<?php if ( is_active_sidebar( 'afp_welcome_widget_last' ) ) {
-
-					dynamic_sidebar( 'afp_welcome_widget_last' );
-
-				} else {
-
-					$placeholder = sprintf(
-						'<h3>%1s</h3>',
-						esc_html( 'Column Three', 'af-plugin' )
-					);
-					$placeholder .= sprintf(
-						'<p><a href="%1s">%2s</a> %3s.</p>',
-						admin_url( 'widgets.php' ),
-						__( 'Add a widget', 'af-plugin' ),
-						__( 'to this area', 'af-plugin' )
-					);
-
-					echo $placeholder;
-
-				} ?>
-
-			<?php do_action( 'afp_welcome_panel_column_last_after' ); ?>
-		</div>
-
-		<?php do_action( 'afp_welcome_panel_column_container_after' ); ?>
-	</div>
-
-	<?php do_action( 'afp_welcome_panel_content_after' ); ?>
+<div class="afp-dashboard-summary">
+    <?php wp_dashboard_right_now(); ?>
 </div>
-<?php do_action( 'afp_after_welcome_panel_content' ); ?>
+<div class="afp-dashboard-post-managment">
+    <header class="afp-dashboard-section-header">
+        <h3><?php _e( 'Manage Your Projects', 'afp-plugin' ); ?></h3>
+    </header>
+    <ul class="afp-dashboard-actions">
+		<li>
+            <h4><?php _e( 'Media', 'afp-plugin' ); ?></h4>
+            <div class="afp-dashboard-content-actions-icon front-icon"><span class="dashicons dashicons-format-image"></span></div>
+            <p>
+                <a href="<?php echo admin_url( 'media-new.php' ); ?>"><?php _e( 'Add New', 'afp-plugin' ); ?></a>
+                <a href="<?php echo admin_url( 'upload.php' ); ?>"><?php _e( 'Manage', 'afp-plugin' ); ?></a>
+            </p>
+        </li>
+        <li>
+            <h4><?php _e( 'Film + TV', 'afp-plugin' ); ?></h4>
+            <div class="afp-dashboard-post-type-actions-icon project-icon"><span class="dashicons dashicons-format-video"></span></div>
+            <p>
+                <a href="<?php echo admin_url( 'post-new.php?post_type=project' ); ?>"><?php _e( 'Add New', 'afp-plugin' ); ?></a>
+                <a href="<?php echo admin_url( 'edit.php?post_type=project' ); ?>"><?php _e( 'View List', 'afp-plugin' ); ?></a>
+            </p>
+        </li>
+        <li>
+            <h4><?php _e( 'Press', 'afp-plugin' ); ?></h4>
+            <div class="afp-dashboard-post-type-actions-icon press-icon"><span class="dashicons dashicons-megaphone"></span></div>
+            <p>
+                <a href="<?php echo admin_url( 'post-new.php?post_type=press' ); ?>"><?php _e( 'Add New', 'afp-plugin' ); ?></a>
+                <a href="<?php echo admin_url( 'edit.php?post_type=press' ); ?>"><?php _e( 'View List', 'afp-plugin' ); ?></a>
+            </p>
+        </li>
+        <li>
+            <h4><?php _e( 'Galleries', 'afp-plugin' ); ?></h4>
+            <div class="afp-dashboard-post-type-actions-icon galleries-icon"><span class="dashicons dashicons-format-gallery"></span></div>
+            <p>
+                <a href="<?php echo admin_url( 'post-new.php?post_type=gallery' ); ?>"><?php _e( 'Add New', 'afp-plugin' ); ?></a>
+                <a href="<?php echo admin_url( 'edit.php?post_type=gallery' ); ?>"><?php _e( 'View List', 'afp-plugin' ); ?></a>
+            </p>
+        </li>
+    </ul>
+</div>
+<div class="afp-dashboard-managment">
+    <header class="afp-dashboard-section-header">
+        <h3><?php _e( 'Manage Your Pages', 'afp-plugin' ); ?></h3>
+    </header>
+    <ul class="afp-dashboard-actions">
+        <li>
+            <h4><?php _e( 'Front Page', 'afp-plugin' ); ?></h4>
+            <div class="afp-dashboard-content-actions-icon front-icon"><span class="dashicons dashicons-admin-home"></span></div>
+            <p>
+                <a href="<?php echo admin_url( 'post.php?post=' . get_option( 'page_on_front' ) . '&action=edit' ); ?>"><?php _e( 'Manage Content', 'afp-plugin' ); ?></a>
+            </p>
+		</li>
+		<li>
+            <h4><?php _e( 'Bio', 'afp-plugin' ); ?></h4>
+            <div class="afp-dashboard-content-actions-icon bio-icon"><span class="dashicons dashicons-id-alt"></span></div>
+            <p>
+                <a href="<?php echo admin_url( 'post.php?post=' . $bio_id . '&action=edit' ); ?>"><?php _e( 'Manage Bio', 'afp-plugin' ); ?></a>
+            </p>
+        </li>
+        <li>
+            <h4><?php _e( 'Contact', 'afp-plugin' ); ?></h4>
+            <div class="afp-dashboard-content-actions-icon contact-icon"><span class="dashicons dashicons-email"></span></div>
+            <p>
+                <a href="<?php echo admin_url( 'post.php?post=' . $contact_id . '&action=edit' ); ?>"><?php _e( 'Manage Info', 'afp-plugin' ); ?></a>
+            </p>
+        </li>
+    </ul>
+</div>

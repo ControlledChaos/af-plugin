@@ -37,30 +37,23 @@ if ( ! empty( $title ) ) {
 if ( ! empty( $description ) ) {
     $description = get_bloginfo( 'description' );
 } else {
-    $description = __( 'Add a tagline in Settings > General or change this in', 'af-plugin' ) . ' <code>af-plugin/admin/partials/admin-header.php</code>';
+    $description = null;
 }
 
-// Get the admin menu registered in `class-admin-pages.php`.
-$menu = 'admin-header';
-
-// Apply filters to the variables.
-$title       = apply_filters( 'afp_admin_header_title', $title );
-$description = apply_filters( 'afp_admin_header_description', $description );
-$menu        = apply_filters( 'afp_admin_header_menu', $menu );
 ?>
 <?php do_action( 'afp_before_admin_header' ); ?>
 <header class="afp-admin-header">
     <?php do_action( 'afp_before_admin_site_branding' ); ?>
-    <div class="admin-site-branding">
-        <p class="admin-site-title" itemprop="name"><a href="<?php echo admin_url(); ?>"><?php echo $title; ?></a></p>
-        <p class="admin-site-description"><?php echo $description; ?></p>
+    <div class="site-branding admin-site-branding">
+        <p class="site-title admin-site-title" itemprop="name"><a href="<?php echo admin_url(); ?>"><?php echo $title; ?></a></p>
+        <p class="site-description admin-site-description"><?php echo $description; ?></p>
     </div>
     <?php do_action( 'afp_after_admin_site_branding' ); ?>
     <?php do_action( 'afp_before_admin_navigation' ); ?>
     <nav class="admin-navigation">
         <?php wp_nav_menu(
             array(
-                'theme_location'  => $menu,
+                'theme_location'  => 'admin-header',
                 'container'       => false,
                 'menu_id'         => 'admin-navigation-list',
                 'menu_class'      => 'admin-navigation-list',
