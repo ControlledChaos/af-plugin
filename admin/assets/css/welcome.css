@@ -3,6 +3,14 @@
  *
  * Based on the default welcome panel.
  */
+.welcome-panel {
+  background: inherit;
+}
+
+.welcome-panel:before, .welcome-panel:after {
+  background: none;
+}
+
 .welcome-panel-content {
   padding-bottom: 1em;
 }

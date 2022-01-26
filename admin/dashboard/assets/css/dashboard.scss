@@ -107,3 +107,16 @@
 	display: inline-block;
 	margin: 0 0.65em;
 }
+
+.welcome-panel {
+	background: inherit;
+
+	&:before,
+	&:after {
+		background: none;
+	}
+}
+
+.welcome-panel-content {
+	padding-bottom: 1em;
+}
